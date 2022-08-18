@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;0,800;1,700&family=Rubik+Burned&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+ }
+
+body {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
+}
+
+.calculator {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons {
+  display: grid;
+  width: 500px;
+  height: 500px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-gap: 5px;
+  /* grid-template-areas: */
+  /* "header header" */
+  /* "rightside content" */
+}
+
+button {
+  font-size: 2em;
+}
+
+.clear {
+  /* grid-area: header; */
+  grid-column: 1/3;
+}
+
+.delete {
+  grid-column: 3/5;
+}
+
+.calculator {
+  border: black solid 5px;
+  border-radius: 25px;
+  padding: 20px;
+  background-color: darkgray;
+  gap: 20px;
+}
+
+.screen {
+  text-align: right;
+  font-size: 3em;
+}
+
+.display {
+  border: black solid 5px;
+  height: 10%;
+  padding: 5px;
+}
