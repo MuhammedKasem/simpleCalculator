@@ -3,10 +3,12 @@ const screen = document.querySelector('.screen');
 const clearBtn = document.querySelector('.clear');
 const digits = document.querySelectorAll('.digit');
 const operations = document.querySelectorAll('.operation')
+const equalsBtn = document.querySelector('.equalBtn');
 let num1 = "";
 let num2 = "";
 let displayText = "";
 let operation = "";
+let result = 0.0;
 
 function add (num1, num2) {
   return parseFloat(num1) + parseFloat(num2);
@@ -24,29 +26,26 @@ function divide (num1, num2) {
   return parseFloat(num1) / parseFloat(num2);
 }
 
-function operate(num1, num2, operation) {
+function operate(num1, num2) {
   switch(operation) {
-  case "add":
-    add(num1, num2);
+  case "+":
+    result = add(num1, num2);
     break;
   
-  case "subtract":
-    subtract(num1, num2);
+  case "-":
+    result = subtract(num1, num2);
     break;
 
-  case "multiply":
-    multiply(num1, num2);
+  case "x":
+    result = multiply(num1, num2);
     break;
 
-  case "divide":
-    divide(num1, num2);
+  case "/":
+    result = divide(num1, num2);
     break;
   }
+  return result;
 }
-
-// buttons.forEach((button) => {
-  // button.addEventListener('click', setDisplay)
-// })
 
 digits.forEach((digit) => {
   digit.addEventListener('click', setDisplay);
@@ -59,11 +58,26 @@ operations.forEach((operationBtn) => {
 
 function setDisplay(e) {
   screen.textContent += e.target.innerHTML
-  if (operation == "") { num1 += e.target.innerHTML;}
-  else { num2 += e.target.innerHTML;}
-  (e.target.classList.contains('operation')) ? operation = e.target.innerHTML : operation = "";
-  console.log(operation);
-  // (operation == "") ? num1 += e.target.innerHTML : num2 += e.target.innerHTML;
+  if (e.target.classList.contains('operation')) {
+    if (num1 !== "" && num2!== "") { num1 = operate(num1, num2); num2 = "" };
+    operation = e.target.innerHTML;
+      console.log(num1);
+      console.log(num2);
+      return;
+    }
+  (operation == "") ? num1 += e.target.innerHTML : num2 += e.target.innerHTML;
 }
 
-clearBtn.addEventListener('click', () => { screen.textContent = "0";})
+function clearCalc() {
+  num1 = "";
+  num2 = "";
+  operation = "";
+  result = 0;
+}
+clearBtn.addEventListener('click', () => { screen.textContent = "0"; clearCalc();})
+equalsBtn.addEventListener('click', () => { 
+  result = operate(num1, num2);
+  screen.textContent += ' = ' + result;
+  operation = "";
+  console.log(result);
+})
