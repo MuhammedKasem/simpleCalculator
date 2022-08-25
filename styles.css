@@ -10,7 +10,6 @@ body {
   height: 100vh;
   justify-content: center;
 }
-
 .calculator {
   display: flex;
   flex-direction: column;
