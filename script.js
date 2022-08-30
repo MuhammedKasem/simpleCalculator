@@ -4,6 +4,7 @@ const clearBtn = document.querySelector('.clear');
 const digits = document.querySelectorAll('.digit');
 const operations = document.querySelectorAll('.operation')
 const equalsBtn = document.querySelector('.equalBtn');
+
 let num1 = "";
 let num2 = "";
 let displayText = "";
@@ -44,7 +45,7 @@ function operate(num1, num2) {
       result = divide(num1, num2);
       break;
   }
-  return result;
+  return parseFloat(result.toFixed(2));
 }
 
 digits.forEach((digit) => {
@@ -57,8 +58,12 @@ operations.forEach((operationBtn) => {
 
 
 function setDisplay(e) {
+  // Sets the screen content to empty in order to remove the 0 before displaying content.
   if (screen.textContent == 0) screen.textContent = "";
+
   screen.textContent += e.target.innerHTML
+
+  // Checks if operator button was clicked and if both numbers contain values yet.
   if (e.target.classList.contains('operation')) {
     if (num1 !== "" && num2 !== "") {
       num1 = operate(num1, num2);
@@ -69,19 +74,24 @@ function setDisplay(e) {
     operation = e.target.innerHTML;
     return;
   }
+  // If the operation is not assigned yet assign the value the user enters to num1 else assign it to num2.
   (operation == "") ? num1 += e.target.innerHTML : num2 += e.target.innerHTML;
 }
 
+// Resets data when the clear button is pressed.
 function clearCalc() {
   num1 = "";
   num2 = "";
   operation = "";
   result = 0;
 }
+
 clearBtn.addEventListener('click', () => { screen.textContent = "0"; clearCalc(); })
 equalsBtn.addEventListener('click', () => {
   result = operate(num1, num2);
-  screen.textContent += ' = ' + result;
+  screen.textContent = result;
   operation = "";
   console.log(result);
+  console.log(`num 1 = ${num1} num2 = ${num2}`)
 })
+

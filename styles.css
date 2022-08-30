@@ -58,3 +58,15 @@ button {
   height: 10%;
   padding: 5px;
 }
+
+.operation {
+  background-color: orange;
+}
+
+.clear {
+  background-color: lightblue;
+}
+
+.delete {
+  background-color: red;
+}
